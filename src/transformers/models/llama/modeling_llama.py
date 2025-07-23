@@ -483,6 +483,7 @@ class LlamaForCausalLM(LlamaPreTrainedModel, GenerationMixin):
             print(kwargs)
             loss = self.loss_function(logits=logits, labels=labels, vocab_size=self.config.vocab_size, **kwargs)
             print(loss)
+            print(logits)
 
         return CausalLMOutputWithPast(
             loss=loss,

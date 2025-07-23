@@ -479,7 +479,8 @@ class LlamaForCausalLM(LlamaPreTrainedModel, GenerationMixin):
 
         loss = None
         if labels is not None:
-            print(self.loss_function, **kwargs)
+            print(self.loss_function)
+            print(kwargs)
             loss = self.loss_function(logits=logits, labels=labels, vocab_size=self.config.vocab_size, **kwargs)
             print(loss)
 

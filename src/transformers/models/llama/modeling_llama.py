@@ -473,9 +473,15 @@ class LlamaForCausalLM(LlamaPreTrainedModel, GenerationMixin):
         slice_indices = slice(-logits_to_keep, None) if isinstance(logits_to_keep, int) else logits_to_keep
         logits = self.lm_head(hidden_states[:, slice_indices, :])
 
+        print("DEBUGGING ============")
+        print(logits)
+        print(labels)
+
         loss = None
         if labels is not None:
+            print(self.loss_function, **kwargs)
             loss = self.loss_function(logits=logits, labels=labels, vocab_size=self.config.vocab_size, **kwargs)
+            print(loss)
 
         return CausalLMOutputWithPast(
             loss=loss,
